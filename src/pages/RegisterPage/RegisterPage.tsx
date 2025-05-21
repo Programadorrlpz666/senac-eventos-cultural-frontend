@@ -1,32 +1,68 @@
 import React, { useState } from 'react';
 import styles from './RegisterPage.module.css';
+import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 
-const RegisterPage: React.FC = () => {
-  const [nome, setNome] = useState('');
+
+interface RegisterProps { 
+  onRegisterSucess?: () => void;
+}
+
+const RegisterPage: React.FC<RegisterProps> = ({onRegisterSucess}) => {
+
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [tipo, setTipo] = useState('');
+  const [role, setRole] = useState<'PARTICIPANT' | 'ORGANIZER'> ('PARTICIPANT');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<String | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(null)
 
-    alert('Usuário cadastrado com sucesso!');
+    try {
+      const res = await fetch('https://senac-eventos-cultural-backend-production.up.railway.app/auth/register',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, role }),
+      }
+      );
 
-    setNome('');
-    setEmail('');
-    setTipo('');
-  };
+  if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.message || 'Falha no registro');
+
+    }
+    alert('Cadastro realizado com sucesso!');
+    onRegisterSucess?.();
+    window.location.href = '/login';
+
+    } catch (err: unknown) {
+     const msg = err instanceof Error ? err.message : String(err);
+     setError(msg);
+     alert(`Erro ao registrar: ${msg}`);
+
+      }
+    };
+
+
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Registrar Usuário</h2>
+
+      {
+        error && <div className={styles.error}>{error}</div>
+      }
+
       <form onSubmit={handleSubmit}>
-        <label className={styles.label} htmlFor="nome">Nome</label>
+        <label className={styles.label} htmlFor="name">Nome</label>
         <input
           className={styles.input}
           type="text"
-          id="nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           required
         />
 
@@ -39,18 +75,28 @@ const RegisterPage: React.FC = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-
-        <label className={styles.label} htmlFor="tipo">Tipo</label>
-        <select
+ 
+        <label className={styles.label} htmlFor="Password">Senha</label>
+        <input
           className={styles.input}
-          id="tipo"
-          value={tipo}
-          onChange={(e) => setTipo(e.target.value)}
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+
+        <label className={styles.label} htmlFor="role">Tipo</label>
+        <select
+          className={styles.select}
+          id="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value as 'PARTICIPANT' | 'ORGANIZER')}
           required
         >
           <option value="" disabled>Selecione</option>
-          <option value="participante">Participante</option>
-          <option value="organizador">Organizador</option>
+          <option value="PARTICIPANT">Participante</option>
+          <option value="ORGANIZER">Organizador</option>
         </select>
 
         <button type="submit" className={styles.button}>Registrar</button>

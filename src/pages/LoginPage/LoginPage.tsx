@@ -1,14 +1,13 @@
 import React, { useState, type FormEvent } from "react";
 import styles from "./LoginPage.module.css";
+import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
+import { useAuth } from "../../contexts/AuthContext";
 
-interface LoginProps {
-  onLoginSucess?: (token: string) => void;
-}
-
-const Login: React.FC<LoginProps> = ({ onLoginSucess }) => { 
+const Login: React.FC = () => { 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const { login } = useAuth();
 
   const handleSubmit = async (e: FormEvent) => {
    e.preventDefault();
@@ -28,9 +27,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSucess }) => {
       const data = await res.json();
       throw new Error(data.message || "Falha no login");
     }
-    const data = await res.json();
-    onLoginSucess?.(data.token);
-    alert("Login Efetuado");
+    const { token } = await res.json();
+    login(token);
+    window.location.href = "/";
 
     } catch (err: unknown) {
       if (err instanceof Error) {
