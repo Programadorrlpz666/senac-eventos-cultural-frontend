@@ -49,8 +49,8 @@ const Login: React.FC = () => {
   return (
     <div className={styles.header}>
       <header className="login-header">
-        <div className="login-title">Senac Eventos Cultural</div>
-        <div className="login-section">Login</div>
+        <div className="login-title">Logo</div>
+        <div className="login-section">Senac Eventos Cultural</div>
       </header>
 
       <div className={styles.container}>

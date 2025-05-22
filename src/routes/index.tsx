@@ -5,6 +5,7 @@ import EventsPage from '../pages/EventsPage/EventsPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import MyEventsPage from '../pages/MyEventsPage/MyEventsPage';
+import CreateEventsPage from '../pages/CreateEventsPage/CreateEventsPage';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ const AppRouter = () => (
             <Route path={ROUTES.login} element={<LoginPage />} />
             <Route path={ROUTES.register} element={<RegisterPage />} />
             <Route path={ROUTES.myevents} element={<MyEventsPage />} />
+            <Route path={ROUTES.create_events} element={<CreateEventsPage />} />
         </Routes>
     </BrowserRouter>
 );
