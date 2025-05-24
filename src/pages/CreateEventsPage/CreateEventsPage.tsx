@@ -1,5 +1,5 @@
 import React, { useState, type FormEvent } from "react";
-import styles from "./CreateEventsPage.module.css"; // crie o CSS como preferir
+import styles from "./CreateEventsPage.module.css";
 import NavBarComponent from "../../components/NavBar/NavBarComponent";
 
 export default function CreateEventPage() {
