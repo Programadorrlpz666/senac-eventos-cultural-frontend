@@ -6,6 +6,8 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import MyEventsPage from '../pages/MyEventsPage/MyEventsPage';
 import CreateEventsPage from '../pages/CreateEventsPage/CreateEventsPage';
+import DashBoardPage from '../pages/DashboardPage/DashboardPage';
+import ParticipantModal from '../components/ParticipantModal/ParticipantModal';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -16,6 +18,8 @@ const AppRouter = () => (
             <Route path={ROUTES.register} element={<RegisterPage />} />
             <Route path={ROUTES.myevents} element={<MyEventsPage />} />
             <Route path={ROUTES.create_events} element={<CreateEventsPage />} />
+            <Route path={ROUTES.dashboard} element={<DashBoardPage />} />
+
         </Routes>
     </BrowserRouter>
 );
