@@ -7,7 +7,6 @@ import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import MyEventsPage from '../pages/MyEventsPage/MyEventsPage';
 import CreateEventsPage from '../pages/CreateEventsPage/CreateEventsPage';
 import DashBoardPage from '../pages/DashboardPage/DashboardPage';
-import ParticipantModal from '../components/ParticipantModal/ParticipantModal';
 
 const AppRouter = () => (
     <BrowserRouter>
