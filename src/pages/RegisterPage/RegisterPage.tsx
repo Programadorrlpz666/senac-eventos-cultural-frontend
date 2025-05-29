@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './RegisterPage.module.css';
-import ButtonComponent from '../../components/ButtonComponent/ButtonComponent';
 
 
 interface RegisterProps { 

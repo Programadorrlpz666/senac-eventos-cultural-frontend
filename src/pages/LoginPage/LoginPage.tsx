@@ -1,6 +1,5 @@
-import React, { useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import styles from "./LoginPage.module.css";
-import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useAuth } from "../../contexts/AuthContext";
 
 const Login: React.FC = () => { 

@@ -183,6 +183,7 @@ function DashBoardPage() {
           <div className={styles.modal}>
             <h2>Editar Evento</h2>
             {modalError && <div className={styles.error}>{modalError}</div>}
+            {modalSuccess && <div><p>Sucesso</p></div>}
             <form onSubmit={handleUpdate}>
               <label>
                 Título
